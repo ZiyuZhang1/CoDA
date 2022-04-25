@@ -1,0 +1,37 @@
+---
+title: "CoDa2"
+author: "Dave Edison Rojas Calderon"
+date: "25/4/2022"
+output: html_document
+---
+Libraries:
+```{r}
+library(dplyr)
+library(tidyverse)
+library(tibble)
+library(stringr)
+library(ggplot2)
+library(RColorBrewer)
+library(zCompositions)
+library(MASS)
+library(NADA)
+library(survival)
+library(Compositional)
+```
+Open files:
+```{r}
+data_spotify = read_delim("data/spotify_19-04-22.csv", 
+                           delim = ";", escape_double = FALSE, trim_ws = TRUE)
+music_genre <- read_excel("data/Music_genre.xlsx")
+```
+
+Replacement of 0:
+```{r}
+repro = data_spotify %>% 
+  select(!Country)
+
+repro = repro/ rowSums(repro)
+
+zeroreplace(repro)
+```
+
